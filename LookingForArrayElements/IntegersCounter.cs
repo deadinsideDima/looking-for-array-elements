@@ -12,8 +12,22 @@ namespace LookingForArrayElements
         /// <returns>The number of occurrences of the elements that are in <paramref name="elementsToSearchFor"/> <see cref="Array"/>.</returns>
         public static int GetIntegersCount(int[]? arrayToSearch, int[]? elementsToSearchFor)
         {
-            // TODO #1. Implement the method using recursion.
-            throw new NotImplementedException();
+            if (arrayToSearch == null)
+            {
+                throw new ArgumentNullException(nameof(arrayToSearch));
+            }
+
+            if (elementsToSearchFor == null)
+            {
+                throw new ArgumentNullException(nameof(elementsToSearchFor));
+            }
+
+            if (arrayToSearch.Length == 0)
+            {
+                return 0;
+            }
+
+            return GetIntegersCount(arrayToSearch, elementsToSearchFor, 0, arrayToSearch.Length);
         }
 
         /// <summary>
@@ -26,8 +40,40 @@ namespace LookingForArrayElements
         /// <returns>The number of occurrences of the elements that are in <paramref name="elementsToSearchFor"/> <see cref="Array"/>.</returns>
         public static int GetIntegersCount(int[]? arrayToSearch, int[]? elementsToSearchFor, int startIndex, int count)
         {
-            // TODO #2. Implement the method using recursion.
-            throw new NotImplementedException();
+            if (arrayToSearch == null)
+            {
+                throw new ArgumentNullException(nameof(arrayToSearch));
+            }
+
+            if (elementsToSearchFor == null)
+            {
+                throw new ArgumentNullException(nameof(elementsToSearchFor));
+            }
+
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            if (startIndex + count > arrayToSearch.Length || startIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+
+            int i = startIndex;
+            int temp = 0;
+            for (int j = 0; j < count; j++)
+            {
+                for (int k = 0; k < elementsToSearchFor.Length; k++)
+                {
+                    if (arrayToSearch[i + j] == elementsToSearchFor[k])
+                    {
+                        temp++;
+                    }
+                }
+            }
+
+            return temp;
         }
     }
 }
